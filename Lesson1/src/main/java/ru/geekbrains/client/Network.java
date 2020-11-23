@@ -11,7 +11,6 @@ import java.util.Set;
 
 import static ru.geekbrains.client.MessagePatterns.*;
 
-@Component("Network")
 public class Network implements Closeable {
 
     public Socket socket;

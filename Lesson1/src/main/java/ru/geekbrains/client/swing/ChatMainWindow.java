@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-@Component("Chat")
 public class ChatMainWindow extends JFrame implements MessageReciever {
 
     private final JList<TextMessage> messageList;
