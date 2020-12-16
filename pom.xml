@@ -20,6 +20,7 @@
         <module>lesson-2-spring</module>
         <module>lesson-3-hibernate</module>
         <module>lesson-4-mvc</module>
+
     </modules>
 
 </project>
