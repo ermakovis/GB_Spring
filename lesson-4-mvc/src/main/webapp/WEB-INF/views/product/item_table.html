@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div class="col-12">
+    <table class="table table-bordered my-2">
+        <thead>
+
+        <tr>
+            <th scope="col">
+                <a th:href="@{/product(pageNumber=${products.number} + 1, pageSize=${param.PageSize},
+                    minPrice=${param.minPrice}, maxPrice=${param.maxPrice}, sortBy='id')}"
+                    class="page-link">
+                    Id
+                </a>
+
+            </th>
+            <th scope="col">
+                <a th:href="@{/product(pageNumber=${products.number} + 1, pageSize=${param.PageSize},
+                    minPrice=${param.minPrice}, maxPrice=${param.maxPrice}, sortBy='name')}"
+                   class="page-link">
+                    Name
+                </a>
+            </th>
+            <th scope="col">
+                <a th:href="@{/product(pageNumber=${products.number} + 1, pageSize=${param.PageSize},
+                    minPrice=${param.minPrice}, maxPrice=${param.maxPrice}, sortBy='price')}"
+                   class="page-link">
+                    Price
+                </a>
+            </th>
+            <th scope="col">Actions</th>
+        </tr>
+        </form>
+        </thead>
+        <tbody>
+        <tr th:if="${products.hasContent()}" th:each="product : ${products.content}">
+            <th scope="row" th:text="${product.id}"></th>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td>
+                <a class="btn btn-success" th:href="@{/product/{id}(id = ${product.id})}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form class="d-inline" th:method="delete" th:action="@{/product/{id}(id = ${product.id})}">
+                    <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                </form>
+            </td>
+        </tr>
+
+        <tr th:unless="${products.hasContent()}">
+            <td colspan="5">Nodata</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</html>
