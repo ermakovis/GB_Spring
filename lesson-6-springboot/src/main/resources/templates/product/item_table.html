@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div class="col-12">
+    <table class="table table-bordered my-2">
+        <thead>
+            <tr>
+                <th scope="col"> ID
+                    <a th:replace="/product/fragments :: sort-link ('id')"></a>
+                </th>
+                <th scope="col"> Name
+                    <a th:replace="/product/fragments :: sort-link ('name')"></a>
+                </th>
+                <th scope="col"> Price
+                    <a th:replace="/product/fragments :: sort-link ('price')"></a>
+                </th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${products.hasContent()}" th:each="product : ${products.content}">
+                <th scope="row" th:text="${product.id}"></th>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:replace="product/fragments :: action_panel (${product.id})"></td>
+            </tr>
+            <tr th:unless="${products.hasContent()}">
+                <td colspan="5">Nodata</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${products.hasContent()}" class="col-12">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li th:classappend="${products.number == 0} ? 'disabled'" class="page-item">
+                    <a th:replace="product/fragments :: page-link (${products.number}, 'Prev')"></a>
+                </li>
+
+                <li th:each="num : ${#numbers.sequence(1, products.totalPages)}"
+                    th:classappend="${num == products.number + 1} ? 'active'"
+                    class="page-item">
+                    <a th:replace="product/fragments :: page-link (${num}, ${num})"></a>
+                </li>
+
+                <li th:classappend="${products.number + 1 == products.totalPages} ? 'disabled'" class="page-item">
+                    <a th:replace="product/fragments :: page-link (${products.number + 2}, 'Next')"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+</html>

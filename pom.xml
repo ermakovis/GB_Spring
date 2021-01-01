@@ -20,7 +20,7 @@
         <module>lesson-2-spring</module>
         <module>lesson-3-hibernate</module>
         <module>lesson-4-mvc</module>
-        <module>lesson-5-thymeleaf</module>
+        <module>lesson-6-springboot</module>
 
     </modules>
 
