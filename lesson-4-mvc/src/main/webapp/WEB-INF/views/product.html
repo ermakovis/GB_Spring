@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head.html"/>
+<title>EShop application</title>
+
+<body>
+
+<nav th:replace="fragments/nav.html"/>
+
+<div class="container">
+    <div class="row py-2">
+        <div class="col-12">
+            <a class="btn btn-primary" th:href="@{/product/new}">Add Product</a>
+        </div>
+
+        <form class="form-inline mt-3" method="get">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="min-filter" class="sr-only">Min:</label>
+                <input th:value="${param.minFilter}" type="text" class="form-control" name="minFilter" id="min-filter"
+                       placeholder="Min">
+
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="max-filter" class="sr-only">Max:</label>
+                <input th:value="${param.maxFilter}" type="text" class="form-control" name="maxFilter" id="max-filter"
+                       placeholder="Max">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Apply</button>
+        </form>
+
+        <div class="col-12">
+            <table class="table table-bordered my-2">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:unless="${products.empty}" th:each="product : ${products}">
+                    <th scope="row" th:text="${product.id}">1</th>
+                    <td th:text="${product.name}">MacBook Air 13" CZ</td>
+                    <td th:text="${product.price}">$1000</td>
+                    <td>
+                        <a class="btn btn-success" th:href="@{/product/{id}(id = ${product.id})}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form class="d-inline" th:method="delete" th:action="@{/product/{id}(id = ${product.id})}">
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
+
+                <tr th:if="${products.empty}">
+                    <td colspan="5">Nodata</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<script th:replace="fragments/scripts.html"/>
+
+</body>
+</html>

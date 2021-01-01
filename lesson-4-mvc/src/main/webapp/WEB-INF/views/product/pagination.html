@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:if="${products.hasContent()}" class="col-12">
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li th:classappend="${products.number == 0} ? 'disabled'" class="page-item">
+                <a th:href="@{/product(pageNumber=${products.number}, pageSize=${param.PageSize},
+                    minPrice=${param.minPrice}, maxPrice=${param.maxPrice})}"
+                    class="page-link">
+                    Previous
+                </a>
+            </li>
+
+            <li th:each="num : ${#numbers.sequence(1, products.totalPages)}"
+                th:classappend="${num == products.number + 1} ? 'active'"
+                class="page-item">
+                <a th:href="@{/product(pageNumber=${num}, pageSize=${param.PageSize},
+                      minPrice=${param.minPrice}, maxPrice=${param.maxPrice})}"
+                    class="page-link">
+                    [[${num}]]
+                </a>
+            </li>
+
+            <li th:classappend="${products.number + 1 == products.totalPages} ? 'disabled'" class="page-item">
+                <a th:href="@{/product(pageNumber=${products.number + 2}, pageSize=${param.PageSize},
+                    minPrice=${param.minPrice}, maxPrice=${param.maxPrice})}"
+                    class="page-link">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+</html>
