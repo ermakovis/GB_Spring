@@ -1,0 +1,30 @@
+GET http://localhost:8080/mvc-app/api/v1/product/get_all
+
+###
+
+DELETE http://localhost:8080/mvc-app/api/v1/product/17
+
+###
+
+GET http://localhost:8080/mvc-app/api/v1/product/16
+
+###
+
+PUT http://localhost:8080/mvc-app/api/v1/product
+Content-Type: application/json
+
+{
+     "id" : 16,
+     "name" : "aaaaaaaaaa",
+     "price" : 113.00
+}
+
+###
+
+POST http://localhost:8080/mvc-app/api/v1/product
+Content-Type: application/json
+
+{
+  "name" : "bbbbbbbbbb",
+  "price" : 23.00
+}
